@@ -39,7 +39,7 @@ public class RenderWindow extends JFrame implements KeyListener, MouseMotionList
 	static int VIEWANGLE = 65;
 	final static int THRESHOLD = 12800;
 	
-	private static final double BRIGHT_MULT = 400;
+	static final double BRIGHT_MULT = 400;
 
 	/*final static float sinTable[] = DegTrigTable.generateSinTable();
 	final static float cosTable[] = DegTrigTable.generateCosTable();
@@ -143,7 +143,7 @@ public class RenderWindow extends JFrame implements KeyListener, MouseMotionList
 		timeStep++;
 		lightIntensity = 0.40 * Math.cos(timeStep / 50.0f) + 0.6;
 		
-		updateMonsters(Monsters);
+		//updateMonsters(Monsters);
 		
 		BufferStrategy bf = this.getBufferStrategy();
 		//g.clearRect(0, 0, WIDTH, HEIGHT);
@@ -248,7 +248,7 @@ public class RenderWindow extends JFrame implements KeyListener, MouseMotionList
 		return distance;
 	}
 	
-	private void drawFloors(Graphics g,Texture texture, WallSlice[] wall) {
+	/*private void drawFloors(Graphics g,Texture texture, WallSlice[] wall) {
 		
 		BufferedImage floorBuffer = new BufferedImage(WIDTH,HEIGHT, BufferedImage.TYPE_3BYTE_BGR);
 		
@@ -256,8 +256,8 @@ public class RenderWindow extends JFrame implements KeyListener, MouseMotionList
 		
 		//byte[] floorPixels = new byte[10000000];
 		
-		/*DataBufferByte textureDataBuffer = (DataBufferByte) texture.getTexture().getRaster().getDataBuffer();
-		byte[] texturePixels = textureDataBuffer.getData();*/
+		//DataBufferByte textureDataBuffer = (DataBufferByte) texture.getTexture().getRaster().getDataBuffer();
+		//byte[] texturePixels = textureDataBuffer.getData();
 		
 		for(int x = 0;x<WIDTH;x++){
 			double angleOffset = offsetTable[x];
@@ -310,7 +310,41 @@ public class RenderWindow extends JFrame implements KeyListener, MouseMotionList
 		
 		
 		
+	}*/
+	
+	private void drawFloors(Graphics g,Texture texture, WallSlice[] wall) {
+		
+	int threadCount = Runtime.getRuntime().availableProcessors();
+	
+	BufferedImage floorBuffer = new BufferedImage(WIDTH,HEIGHT, BufferedImage.TYPE_3BYTE_BGR);
+	
+	byte[] floorPixels = ((DataBufferByte)floorBuffer.getRaster().getDataBuffer()).getData();
+	
+	FloorDrawer[] drawers = new FloorDrawer[threadCount];
+	for(int t = 0;t<threadCount;t++){
+		drawers[t] = new FloorDrawer((int) (WIDTH/threadCount) * t,(int) (WIDTH/threadCount) * (t+1) - 1,floorPixels,texture,wall,player);
+		drawers[t].start();
+		
 	}
+	
+	for (FloorDrawer drawer : drawers) {
+		  try {
+			drawer.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+	
+	//byte[] floorPixels = new byte[10000000];
+	
+	//DataBufferByte textureDataBuffer = (DataBufferByte) texture.getTexture().getRaster().getDataBuffer();
+	//byte[] texturePixels = textureDataBuffer.getData();
+	
+	
+	g.drawImage(floorBuffer, getInsets().left, getInsets().top, null);
+	
+}
 
 	public void updateMonsters(ArrayList<Monster> Monsters){
 		for(Monster monster : Monsters){
@@ -359,7 +393,7 @@ public class RenderWindow extends JFrame implements KeyListener, MouseMotionList
 		return offsets;
 	}
 	
-	public static double getAngleOffset(int x){
+	private static double getAngleOffset(int x){
 		return x*((double)VIEWANGLE/WIDTH) - VIEWANGLE/2;
 	}
 

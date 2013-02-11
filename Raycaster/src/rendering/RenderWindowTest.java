@@ -1,6 +1,7 @@
 package rendering;
 
 import static org.junit.Assert.*;
+import game.Raycaster;
 import levels.Level;
 
 import org.junit.Before;
@@ -66,7 +67,7 @@ public class RenderWindowTest {
 	
 	@Test
 	public void test() {
-		for (int i = 0; i<30;i++){
+		for (int i = 0; i<Raycaster.frameRate;i++){
 			window.render();
 		}
 		
