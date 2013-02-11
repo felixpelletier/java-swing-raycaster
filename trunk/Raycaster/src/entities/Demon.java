@@ -26,6 +26,7 @@ public class Demon extends Monster{
 				
 				speed = (float) ((1-(123/target.getPosition().distance(position))) * 8) + 0;
 				//System.out.println(speed);
+				//double angle = 45;
 				double angle = MathDeg.atan2(position.y- target.getPosition().y, position.x- target.getPosition().x) % 360;
 				if(Math.abs((angle - target.getAngle()) % 360) > 40 && Math.abs((angle - target.getAngle())  % 360) < 320){
 					//System.out.println("moving: "  + Math.abs((angle - target.getAngle()) % 360));
