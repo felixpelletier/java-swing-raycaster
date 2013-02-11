@@ -8,8 +8,6 @@ public class Demon extends Monster{
 	
 	public final static int MIN_DISTANCE = 125;
 	
-	
-	
 	int state = STILL;
 	
 	public Demon(String type, int x, int y) {

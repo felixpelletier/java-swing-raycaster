@@ -1,3 +1,4 @@
+package game;
 import java.util.Date;
 
 import levels.Level;
@@ -6,7 +7,7 @@ import rendering.RenderWindow;
 
 public class Raycaster{
 
-	final static long frameRate = 1000 / 30;
+	public final static long frameRate = 1000 / 60;
 	
 	static long launchTime = new Date().getTime();
 	/**
