@@ -34,11 +34,12 @@ import levels.Level;
 		}
 		
 		private void rollState(){
-			setState((state+1) % 3);
+			setState((byte) ((state+1) % 3));
 		}
 		
-		private void setState(int state){
+		private void setState(byte state){
 			this.state = state;
+			level.getMap()[adress] = state;
 			this.setBackground(color[state]);
 			this.setText(Integer.toString(state));
 		}
@@ -64,7 +65,7 @@ import levels.Level;
 			}
 			
 			if(SwingUtilities.isRightMouseButton(e)){ 
-				setState(0);
+				setState((byte) 0);
 			}
 			
 		}

@@ -1,4 +1,5 @@
 package game;
+import java.io.IOException;
 import java.util.Date;
 
 import levels.Level;
@@ -66,7 +67,17 @@ public class Raycaster{
 	                2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
 	                2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
 	        };
-		Level tempLevel = new Level(tempMap);
+		//Level tempLevel = new Level(tempMap);
+		
+		Level tempLevel = null;
+		
+		try {
+			tempLevel = Level.load("tempMap");
+		} 
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		RenderWindow window = new RenderWindow(tempLevel);
 		long prevTime = new Date().getTime();
