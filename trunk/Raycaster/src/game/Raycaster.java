@@ -8,14 +8,16 @@ import rendering.RenderWindow;
 
 public class Raycaster{
 
-	public final static long frameRate = 1000 / 60;
+	public final static long frameRate = 100;
+	private final static long intervals = 1000 / frameRate;
+	
 	
 	static long launchTime = new Date().getTime();
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
+		/*
 		byte[] tempMap=
 	        {
 	                2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
@@ -66,7 +68,7 @@ public class Raycaster{
 	                2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
 	                2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
 	                2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
-	        };
+	        };*/
 		//Level tempLevel = new Level(tempMap);
 		
 		Level tempLevel = null;
@@ -95,7 +97,7 @@ public class Raycaster{
 			
 			long currentTime = new Date().getTime();
 			
-			if (currentTime-prevTime > frameRate){
+			if (currentTime-prevTime > intervals){
 				window.render();
 				prevTime=currentTime;
 			}

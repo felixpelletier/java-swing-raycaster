@@ -342,7 +342,7 @@ public class RenderWindow extends JFrame implements KeyListener, MouseMotionList
 	//byte[] texturePixels = textureDataBuffer.getData();
 	
 	
-	g.drawImage(floorBuffer, getInsets().left, getInsets().top, null);
+	g.drawImage(floorBuffer, getInsets().left*4, getInsets().top, null);
 	
 }
 
@@ -442,7 +442,7 @@ public class RenderWindow extends JFrame implements KeyListener, MouseMotionList
 
 			BufferedImage shadedSlice = wallTexture.getShadedSlice(wallOffset, (float) (BRIGHT_MULT / wall.getDistance()));
 
-			g.drawImage(shadedSlice, wall.getPosition() + getInsets().left, (HEIGHT-wallHeight) / 2 + getInsets().top, wall.getPosition() + getInsets().left + 1,(HEIGHT+wallHeight) / 2 + getInsets().top,0,0,1,wallTexture.getHeight(), null);
+			g.drawImage(shadedSlice, wall.getPosition() + getInsets().left*4, (HEIGHT-wallHeight) / 2 + getInsets().top, wall.getPosition() + getInsets().left*4 + 1,(HEIGHT+wallHeight) / 2 + getInsets().top,0,0,1,wallTexture.getHeight(), null);
 
 		}
 

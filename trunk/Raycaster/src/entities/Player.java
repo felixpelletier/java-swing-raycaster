@@ -12,7 +12,7 @@ public class Player{
 	//private Point2D.Double position = new Point2D.Double(226.07927744637215,357.9295005055905);
 	//private double angle = 60;
 	
-	private Point2D.Double position = new Point2D.Double(1982.3176763241142,2306.0915650974084);
+	private Point2D.Double position = new Point2D.Double(2764.9217575199855,243.70568001735012);
 	private double angle = 300;
 	double angleStep = 3;
 
